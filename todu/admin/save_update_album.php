@@ -22,7 +22,7 @@ if(empty($_FILES['new-image']['name'])){
   }
 
   if (empty($errors) == true){ // theres no errors that occur, then the picture is uplaoded
-    move_uploaded_file($file_tmp, "gallery/".$file_name);
+    move_uploaded_file($file_tmp, "gallery/album/".$file_name);
   }else {
     print_r($errors);
     die();

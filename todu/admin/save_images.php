@@ -10,7 +10,8 @@ if(isset($_FILES['filesToUpload'])){
       $file_size = $_FILES['filesToUpload']['size'][$i];
       $file_tmp = $_FILES['filesToUpload']['tmp_name'][$i];
       $file_type = $_FILES['filesToUpload']['type'][$i];
-      $file_ext = strtolower(pathinfo($file_name, PATHINFO_EXTENSION)); // Use pathinfo to get the file extension
+      $file_Exp = explode('.', $file_name);
+      $file_ext = strtolower(end($file_Exp));
       $extensions = array("jpeg", "jpg", "png");
 
       if (in_array($file_ext, $extensions) === false) {
@@ -21,7 +22,7 @@ if(isset($_FILES['filesToUpload'])){
           $errors[] = "File size must be 4MB or lower.";
       }
 
-      $new_name = time() . "-" . basename($file_name);
+      $new_name = $file_name .".". uniqid("", false) .".". $file_ext;
       $target = "gallery/" . $new_name;
 
       if (empty($errors) == true) {

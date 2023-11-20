@@ -12,7 +12,7 @@ $row = mysqli_fetch_assoc($result);
 // echo "</pre>";
 // die();
 
-unlink("gallery/".$row['thumbnail']); //to remove the image from the folder 
+unlink("gallery/album/".$row['thumbnail']); //to remove the image from the folder 
 
 $sql = "DELETE FROM album_table WHERE album_id = {$album_id};";
 

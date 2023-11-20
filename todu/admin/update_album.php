@@ -32,7 +32,7 @@
             <div class="form-group my-4">
                 <label for="">Thumbnail</label>
                 <input type="file" name="new-image">
-                <img  src="gallery/<?php echo $row['thumbnail']; ?>" height="150px">
+                <img  src="gallery/album/<?php echo $row['thumbnail']; ?>" height="150px">
                 <input type="hidden" name="old_image" value="<?php echo $row['thumbnail']; ?>">
             </div>
             <input type="submit" name="submit" class="btn btn-primary" value="Update" />

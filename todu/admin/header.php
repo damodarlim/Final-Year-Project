@@ -16,6 +16,8 @@ if(!isset($_SESSION["username"])){
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
         <title>ADMIN Panel</title>
+        <link rel="short icon" href="../img/favicon.jpg" />
+
         <!-- Bootstrap -->
         <link rel="stylesheet" href="../css/bootstrap.min.css" />
         <!-- Font Awesome Icon -->
@@ -30,8 +32,8 @@ if(!isset($_SESSION["username"])){
       <div class="container">
         <a href="index.php" class="navbar-brand">
           <img
-            src="img/logo.jpg"
-            alt="Temple of Devotion and Understanding"
+            src="../img/logo.jpg"
+            alt="TODU"
             title="Iskcon Seberang Jaya"
           />
         </a>
@@ -58,6 +60,12 @@ if(!isset($_SESSION["username"])){
             </li>
             <li class="nav-item">
               <a href="images.php" class="nav-link">Gallery</a>
+            </li>
+            <li class="nav-item">
+              <a href="activity.php" class="nav-link">Activity</a>
+            </li>
+            <li class="nav-item">
+              <a href="donation.php" class="nav-link">Donation</a>
             </li>
             <li class="nav-item">
               <a href="members.php" class="nav-link">Users</a>

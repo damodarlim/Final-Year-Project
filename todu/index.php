@@ -226,54 +226,6 @@
     </a>
 
     <!-- Start Footer  -->
-    <footer>
-      <div class="container">
-        <div class="row text-light text-center py-4 justify-content-center">
-          <div class="col-sm-10 col-md-8 col-lg-6">
-            <img src="img/logo.jpg" alt="" />
-            <p>Subscribe now if you want more information!</p>
-            <ul class="social pt-3">
-              <li>
-                <a href="Put link" target="_blank"
-                  ><i class="fab fa-facebook"></i
-                ></a>
-              </li>
-              <li>
-                <a href="Put link" target="_blank"
-                  ><i class="fab fa-twitter"></i
-                ></a>
-              </li>
-              <li>
-                <a href="Put link" target="_blank"
-                  ><i class="fab fa-instagram"></i
-                ></a>
-              </li>
-              <li>
-                <a href="Put link" target="_blank"
-                  ><i class="fab fa-youtube"></i
-                ></a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </div>
-    </footer>
-
-    <!-- End Footer  -->
-
-    <!-- Start Socket  -->
-
-    <div class="socket text-light text-center py-3">
-      <p>
-        &copy; <a href="https://getbootstrap.com/" target="_blank">TODU.com</a>
-      </p>
-    </div>
-
-    <!-- End Socket -->
-
-    <script src="js/jquery-3.7.1.min.js"></script>
-    <script src="js/bootstrap.min.js"></script>
-    <script src="js/popper.min.js"></script>
-    <script src="js/all.min.js"></script>
-  </body>
-</html>
+<?php 
+  include ('includes/footer.php');
+?>

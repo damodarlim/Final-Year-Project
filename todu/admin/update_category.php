@@ -22,32 +22,32 @@ if(isset($_POST['submit'])){
                   <h1 class="admin-heading">Update Category</h1>
               </div>
               <div class="container d-flex justify-content-center">
-                <!-- Form Start  -->
-                <?php 
-                include ('../includes/dbconnect.php');
-
-                $cat_id = $_GET['id'];
-                $sql = "SELECT * FROM category_table WHERE category_id = {$cat_id}";
-                $result = mysqli_query($conn, $sql) or die ("Query Failed.");
-
-                if(mysqli_num_rows($result) > 0) {
-                    while($row = mysqli_fetch_assoc($result)){                
-                ?>
-                  <form action="<?php $_SERVER['PHP_SELF']; ?>" method ="POST">
-                      <div class="form-group">
-                          <input type="hidden" name="cat_id"  class="form-control" value="<?php echo $row['category_id'];?>" placeholder="">
-                      </div>
-                      <div class="form-group my-4">
-                          <label>Category Name</label>
-                          <input type="text" name="cat_name" class="form-control" value="<?php echo $row['category_name'];?>"  placeholder="" required>
-                      </div>
-                      <input type="submit" name="submit" class="btn btn-primary" value="Update" required />
-                  </form>
+                  <!-- Form Start  -->
                   <?php 
-                    }
-                }
+                  include ('../includes/dbconnect.php');
+
+                  $cat_id = $_GET['id'];
+                  $sql = "SELECT * FROM category_table WHERE category_id = {$cat_id}";
+                  $result = mysqli_query($conn, $sql) or die ("Query Failed.");
+
+                  if(mysqli_num_rows($result) > 0) {
+                      while($row = mysqli_fetch_assoc($result)){                
                   ?>
-                <!-- Form End  -->
+                    <form action="<?php $_SERVER['PHP_SELF']; ?>" method ="POST">
+                        <div class="form-group">
+                            <input type="hidden" name="cat_id"  class="form-control" value="<?php echo $row['category_id'];?>" placeholder="">
+                        </div>
+                        <div class="form-group my-4">
+                            <label>Category Name</label>
+                            <input type="text" name="cat_name" class="form-control" value="<?php echo $row['category_name'];?>"  placeholder="" required>
+                        </div>
+                        <input type="submit" name="submit" class="btn btn-primary" value="Update" required />
+                    </form>
+                    <?php 
+                      }
+                  }
+                    ?>
+                  <!-- Form End  -->
                 </div>
               </div>
             </div>

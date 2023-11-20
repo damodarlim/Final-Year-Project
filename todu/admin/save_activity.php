@@ -21,7 +21,7 @@ include ('../includes/dbconnect.php');
       $errors[] = "File size must be 4MB or lower.";
     }
     $imageNewName = $file_name .".". uniqid("", false) .".". $file_ext; // creata a uniq ID, set to false to create a shorter UniqID
-    $Destination = "upload/". $imageNewName;
+    $Destination = "upload/activity/" . $imageNewName; // Changed destination to include "activity" folder
 
     if (empty($errors) == true){ // theres no errors that occur, then the picture is uplaoded
       move_uploaded_file($file_tmp, $Destination);
@@ -32,18 +32,15 @@ include ('../includes/dbconnect.php');
   }
 
   session_start();
-  $title = mysqli_real_escape_string($conn, $_POST['post_title']);
-  $description = mysqli_real_escape_string($conn, $_POST['postdesc']);
-  $category = mysqli_real_escape_string($conn, $_POST['category']);
-  $date = date("d M, Y");
-  $author = $_SESSION['member_id']; //THis will mean that who ever is logged in at that time and post. will be the author `
+  $title = mysqli_real_escape_string($conn, $_POST['activity_title']);
+  $description = mysqli_real_escape_string($conn, $_POST['actdesc']);
+  $addedBy = $_SESSION['member_id']; //THis will mean that who ever is logged in at that time and post. will be the author `
 
-  $sql = "INSERT INTO news_table (title, description, category, publish_date,author, news_img)
-            VALUES ('{$title}', '{$description}', '{$category}', '{$date}', {$author}, '{$imageNewName}');";
-  $sql .= "UPDATE category_table SET post = post + 1 WHERE category_id = {$category}"; // to add into the Post section in the Category table
+  $sql = "INSERT INTO activities_table (title, description, activity_img, added_by)
+            VALUES ('{$title}', '{$description}', '{$imageNewName}', '{$addedBy}')";
 
-  if(mysqli_multi_query($conn, $sql)) {
-    header("location: {$hostname}/admin/post.php");
+  if(mysqli_query($conn, $sql)) {
+    header("location: {$hostname}/admin/activity.php");
   }else {
     echo "<div class='alert alert-danger'>Query Failed.</div>";
   }

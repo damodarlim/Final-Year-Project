@@ -20,7 +20,7 @@ include ('../includes/dbconnect.php');
       $errors[] = "File size must be 4MB or lower.";
     }
     $new_name = time(). "-".basename($file_name) ;
-    $target = "gallery/". $new_name;
+    $target = "gallery/album/". $new_name;
 
     if (empty($errors) == true){ // theres no errors that occur, then the picture is uplaoded
       move_uploaded_file($file_tmp, $target);
