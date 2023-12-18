@@ -10,7 +10,8 @@ if(empty($_FILES['new-image']['name'])){
   $file_size = $_FILES['new-image']['size'];
   $file_tmp = $_FILES['new-image']['tmp_name'];
   $file_type = $_FILES['new-image']['type'];
-  $file_ext = strtolower(end(explode('.', $file_name))); // it will first saperate the name, then take the end and make all the letters to small 
+  $file_Exp = explode('.', $file_name);
+  $file_ext = strtolower(end($file_Exp));// it will first saperate the name, then take the end and make all the letters to small 
   $extensions = array("jpeg", "jpg", "png");
 
 
@@ -19,7 +20,7 @@ if(empty($_FILES['new-image']['name'])){
   }
 
   if ($file_size > 4097152 ){ //4097152 is in bits
-    $errors[] = "File size must be 2MB or lower.";
+    $errors[] = "File size must be 4MB or lower.";
   }
 
   if (empty($errors) == true){ // theres no errors that occur, then the picture is uplaoded
@@ -47,7 +48,7 @@ $sql = "UPDATE news_table SET title = ?, description = ?, category = ?, news_img
 $stmt = mysqli_prepare($conn, $sql);
 
 if ($stmt) {
-  // mysqli_stmt_bind_param is used to be more secure and prevent sql injection
+  // mysqli_stmt_bind_param used to be more secure and prevent sql injection
     mysqli_stmt_bind_param($stmt, "ssiss", $_POST["news_title"], $_POST["newsdesc"], $_POST["category"], $file_name, $_POST["news_id"]); 
     $result = mysqli_stmt_execute($stmt);
     mysqli_stmt_close($stmt);
@@ -55,7 +56,7 @@ if ($stmt) {
     if ($result) {
       // Check if the category has been changed
       if ($_POST['old_category'] != $_POST['category']) {
-          // Category has been changed, increment the post count in the new category
+          // Category has been changed, -1 in category
           $sqlIncrement = "UPDATE category_table SET post = post + 1 WHERE category_id = {$_POST['category']}";
           $resultIncrement = mysqli_query($conn, $sqlIncrement);
   
@@ -64,42 +65,10 @@ if ($stmt) {
               die();
           }
       }
-  
-      header("location: {$hostname}/admin/post.php");
+      echo '<script>alert("Successfully Updated!");</script>';
+      header("location: post.php");
   } else {
       echo "Query Failed";
   }
 }
-
-
-
 ?>
-
-<!-- $sql = "UPDATE news_table SET title = ?, description = ?, category = ?, news_img = ? WHERE news_id = ?";
-$stmt = mysqli_prepare($conn, $sql);
-if ($stmt) {
-    mysqli_stmt_bind_param($stmt, "ssiss", $_POST["news_title"], $_POST["newsdesc"], $_POST["category"], $file_name, $_POST["news_id"]);
-    $result = mysqli_stmt_execute($stmt);
-    mysqli_stmt_close($stmt);
-}
-
-if ($result) {
-    header("location: {$hostname}/admin/post.php");
-} else {
-    echo "Query Failed";
-} -->
-
-
-
-
-
-<!-- $sql = "UPDATE news_table SET title = '{$_POST["news_title"]}', description = '{$_POST["newsdesc"]}', category={$_POST["category"]}, news_img='{$file_name}'
-        WHERE news_id={$_POST["news_id"]}";
-$result = mysqli_query($conn, $sql);
-
-if($result){
-  header ("location: {$hostname}/admin/post.php");
-  
-}else {
-  echo "Query Failed";
-} -->

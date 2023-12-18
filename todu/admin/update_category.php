@@ -1,17 +1,22 @@
 <?php include "header.php"; 
 
-if(isset($_POST['submit'])){
-    include "config.php";
+if (isset($_POST['submit'])) {
+  include ('../includes/dbconnect.php');
 
-    $catid = mysqli_real_escape_string($conn, $_POST ['cat_id']);
-    $catname = mysqli_real_escape_string($conn, $_POST ['cat_name']);
+  $catid = mysqli_real_escape_string($conn, $_POST['cat_id']);
+  $catname = mysqli_real_escape_string($conn, $_POST['cat_name']);
 
-    $sql = "UPDATE category_table SET category_name ='{$catname}' WHERE category_id = '{$catid}' ";
-    $result = mysqli_query($conn, $sql) or die ("Query Failed");
+  $sql = "UPDATE category_table SET category_name = ? WHERE category_id = ?";
+  $stmt = mysqli_prepare($conn, $sql);
+  mysqli_stmt_bind_param($stmt, "si", $catname, $catid);
+  $result = mysqli_stmt_execute($stmt);
 
-    if(mysqli_query($conn, $sql)) {
-      header("location: ../{$hostname}/admin/category.php");
-    }
+  if (!$result) {
+      die("Query Failed: " . mysqli_error($conn));
+  } else {
+    echo '<script>alert("Successfully Updated!");</script>';
+      header("location: category.php");
+  }
 }
 
 ?>
@@ -33,7 +38,7 @@ if(isset($_POST['submit'])){
                   if(mysqli_num_rows($result) > 0) {
                       while($row = mysqli_fetch_assoc($result)){                
                   ?>
-                    <form action="<?php $_SERVER['PHP_SELF']; ?>" method ="POST">
+                    <form action="<?php echo $_SERVER['PHP_SELF']; ?>" method ="POST">
                         <div class="form-group">
                             <input type="hidden" name="cat_id"  class="form-control" value="<?php echo $row['category_id'];?>" placeholder="">
                         </div>

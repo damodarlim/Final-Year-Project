@@ -40,7 +40,7 @@ if ($stmt) {
     mysqli_stmt_close($stmt);
 
     if ($result) {
-      header("location: {$hostname}/admin/activity.php");
+      header("location: activity.php");
     } else {
       echo "Query Failed: " . mysqli_error($conn);
     }

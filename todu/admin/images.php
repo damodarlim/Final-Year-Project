@@ -29,7 +29,7 @@ include "header.php";
                     if (mysqli_num_rows($result) > 0) {
                 
                 ?>
-                <table class="content-table">
+                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                     <thead>
                         <th>S.No.</th>
                         <th>Album Name</th>
@@ -44,7 +44,13 @@ include "header.php";
                             <td><?php echo $row['title']; ?></td>
                             <td><?php echo $row['upload_date']; ?></td>
                             <td class='edit'><a href='update_images.php?id=<?php echo $row["image_id"]; ?>'><i class='fa fa-edit'></i></a></td>
-                            <td class='delete'><a href='delete_images.php?id=<?php echo $row["image_id"]; ?>'><i class='fa fa-trash'></i></a></td>
+                            <td class='delete'><a href='delete_images.php?id=<?php echo $row["image_id"]; ?>'
+                            onclick='return checkdelete()'><i class='fa fa-trash'></i></a></td>
+                            <script>
+                                function checkdelete() {
+                                    return confirm('Are you sure you wan to delete this record ?');
+                                } 
+                              </script>
                         <tr>                            
                     </tbody>
                     <?php } ?>

@@ -17,7 +17,7 @@ unlink("upload/donation/".$row['donation_img']); //to remove the image from the 
 $sql = "DELETE FROM donation_table WHERE donation_id = {$donation_id}";
 
 if(mysqli_query($conn, $sql)){
-  header("location: {$hostname}/admin/donation.php");
+  header("location: donation.php");
 }else{
   echo "Query Failed";
 }

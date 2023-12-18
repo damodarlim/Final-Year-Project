@@ -39,7 +39,7 @@ $sql = "UPDATE images_table SET album_id = ?, file_path = ? WHERE image_id = ?";
     mysqli_stmt_close($stmt);
 
     if ($result) {
-        header("location: {$hostname}/admin/images.php");
+        header("location: images.php");
         exit; // Always exit after a header redirect
     } else {
         echo "Query Failed";

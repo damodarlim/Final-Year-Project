@@ -31,10 +31,10 @@
                     }
                     // only allow the regular user to see what they have posted and can edit or delete.
                     elseif ($_SESSION["member_role"] == '0'){
-                      $sql = "SELECT news_table.news_id, news_table.title, news_table.description, news_table.publish_date,
-                      category_table.category_name, member_table.username, news_table.category FROM news
-                      LEFT JOIN category_table ON news_table.category = category_table.member_id
-                      LEFT JOIN member_table ON news_table.author = member_table.member_id
+                        $sql = "SELECT news_table.news_id, news_table.title, news_table.description, news_table.publish_date,
+                        category_table.category_name, member_table.username, news_table.category FROM news_table
+                        LEFT JOIN category_table ON news_table.category = category_table.category_id
+                        LEFT JOIN member_table ON news_table.author = member_table.member_id
                       WHERE news_table.author = {$_SESSION['member_id']}
                       ORDER BY news_table.news_id DESC LIMIT {$offset}, {$limit}";
                     }
@@ -44,7 +44,7 @@
                     if (mysqli_num_rows($result) > 0) {
                 
                 ?>
-                  <table class="content-table">
+                  <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                       <thead>
                           <th>S.No.</th>
                           <th>Title</th>
@@ -62,8 +62,14 @@
                               <td><?php echo $row['category_name']; ?></td>
                               <td><?php echo $row['publish_date']; ?></td>
                               <td><?php echo $row['username']; ?></td>
-                              <td class='edit'><a href='update_post.php?id=<?php echo $row["news_id"]; ?>'><i class='fa fa-edit'></i></a></td>
-                              <td class='delete'><a href='delete_post.php?id=<?php echo $row["news_id"];?>&catid=<?php echo $row["category"];?>'><i class='fa fa-trash'></i></a></td>
+                              <td class='edit'><a href='update_post.php?id=<?php echo $row["news_id"]; ?>'><i class='fas fa-edit'></i></a></td>
+                              <td class='delete'><a href='delete_post.php?id=<?php echo $row["news_id"];?>&catid=<?php echo $row["category"];?>'
+                              onclick='return checkdelete()'><i class='fas fa-trash'></i></a></td>
+                              <script>
+                                function checkdelete() {
+                                    return confirm('Are you sure you wan to delete this record ?');
+                                } 
+                              </script>
                           </tr>
                       <?php } ?>
                       </tbody>
@@ -72,8 +78,15 @@
                     echo "<h3>No Records Found</h3>";
                   }
                   // Show Pagination
-                  $sql1 = "SELECT * FROM news_table";
-                  $result1 = mysqli_query($conn, $sql1) or die ("Query Failed.");
+                  if ($_SESSION["member_role"] == '1') {
+                    $countSql = "SELECT COUNT(*) as count FROM news_table";
+                } elseif ($_SESSION["member_role"] == '0') {
+                    $countSql = "SELECT COUNT(*) as count FROM news_table WHERE author = {$_SESSION['member_id']}";
+                }
+                
+                $result1 = mysqli_query($conn, $countSql) or die("Count Query Failed.");
+                $row1 = mysqli_fetch_assoc($result1);
+                $total_records = $row1['count'];
 
                   if (mysqli_num_rows($result1) > 0){
                     $total_records = mysqli_num_rows($result1);

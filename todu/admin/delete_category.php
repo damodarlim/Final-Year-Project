@@ -6,7 +6,7 @@
   $sql = "DELETE FROM category_table WHERE category_id = {$categoryid}";
 
   if (mysqli_query($conn, $sql)){
-    header("location: {$hostname}/admin/category.php");
+    header("location: category.php");
   } else {
     echo "<p style='color:red;margin: 10px 0;'> Cannot Delete the Category Record.</p>";
   }

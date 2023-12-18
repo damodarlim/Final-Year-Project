@@ -40,7 +40,7 @@ include ('../includes/dbconnect.php');
             VALUES ('{$title}', '{$description}', '{$imageNewName}', '{$addedBy}')";
 
   if(mysqli_query($conn, $sql)) {
-    header("location: {$hostname}/admin/activity.php");
+    header("location: activity.php");
   }else {
     echo "<div class='alert alert-danger'>Query Failed.</div>";
   }

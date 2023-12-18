@@ -33,11 +33,11 @@
         ?>       
 
         <div class="recent-post">
-            <a class="post-img" href="single.php?id=<?php echo $row['news_id'];?>">
+            <a class="post-img" href="single_news.php?id=<?php echo $row['news_id'];?>">
                 <img src="admin/upload/<?php echo $row['news_img']; ?>" alt=""/>
             </a>
             <div class="post-content">
-                <h5><a href="single.php?id=<?php echo $row['news_id'];?>"><?php echo $row['title']; ?></a></h5>
+                <h5><a href="single_news.php?id=<?php echo $row['news_id'];?>"><?php echo $row['title']; ?></a></h5>
                 <span>
                     <i class="fa fa-tags" aria-hidden="true"></i>
                     <a href='category.php?cid=<?php echo $row['category']; ?>'><?php echo $row['category_name']; ?></a>
@@ -46,7 +46,7 @@
                     <i class="fa fa-calendar" aria-hidden="true"></i>
                     <?php echo $row['publish_date']; ?>
                 </span>
-                <a class="read-more" href="single.php?id=<?php echo $row['news_id'];?>">read more</a>
+                <a class="read-more" href="single_news.php?id=<?php echo $row['news_id'];?>">read more</a>
             </div>
         </div>
         <?php 

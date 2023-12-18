@@ -17,7 +17,7 @@ unlink("upload/activity/".$row['activity_img']); //to remove the image from the 
 $sql = "DELETE FROM activities_table WHERE activity_id = {$activity_id}";
 
 if(mysqli_query($conn, $sql)){
-  header("location: {$hostname}/admin/activity.php");
+  header("location: activity.php");
 }else{
   echo "Query Failed";
 }

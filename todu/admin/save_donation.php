@@ -41,7 +41,7 @@ include ('../includes/dbconnect.php');
             VALUES ('{$title}', '{$description}', '{$imageNewName}', '{$amount}', '{$addedBy}')";
 
   if(mysqli_query($conn, $sql)) {
-    header("location: {$hostname}/admin/donation.php");
+    header("location: donation.php");
   }else {
     echo "<div class='alert alert-danger'>Query Failed.</div>";
   }

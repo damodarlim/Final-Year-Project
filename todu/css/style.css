@@ -35,7 +35,7 @@ a:hover {
   font-weight: 600;
   letter-spacing: 0.1rem;
   box-shadow: 0 0.5rem 0.5rem rgba(0, 0, 0, 0.1);
-  z-index: 1;
+  z-index: 1000;
 }
 
 .nav-item {
@@ -126,7 +126,7 @@ a:hover {
 .fixed-background {
   position: relative;
   width: 100%;
-  z-index: 1000 !important;
+  z-index: 100 !important;
 }
 
 .fixed-wrap {
@@ -625,3 +625,71 @@ footer {
   line-height: 1.6;
   color: #555;
 }
+
+/* Additional Styles for Login Page */
+body.login-signup-body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background-image: url('../img/BG/bg-2.JPG');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+#login-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+#login-card {
+  background-color: rgba(255, 255, 255, 0.8); /* Adding a semi-transparent white background to the card */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 300px;
+  border-radius: 8px;
+}
+
+#login-card form {
+  display: flex;
+  flex-direction: column;
+}
+
+#login-card label,
+#login-card input,
+#login-card button {
+  margin-bottom: 16px;
+}
+
+#login-card label {
+  margin-bottom: 8px;
+}
+
+#login-card input {
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+#login-card a {
+  color: #007bff;
+  text-decoration: none;
+}
+
+#login-card button {
+  padding: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+#login-card button:hover {
+  background-color: #0056b3;
+}
+
+
+

@@ -1,9 +1,9 @@
 <?php 
 include "header.php";
 include ('../includes/dbconnect.php');
-require_once('../operations.php');
+
 if ($_SESSION["member_role"] == '0'){                     
-  header("location: {$hostname}/admin/post.php");
+  header("location: post.php");
 }
 
   if(isset($_POST['btn-member'])){
@@ -26,7 +26,7 @@ if ($_SESSION["member_role"] == '0'){
       $sql1 = "INSERT INTO member_table (first_name, last_name, username, email, contact, password, role)
               VALUE ('{$fname}', '{$lname}', '{$user}', '{$email}', '{$contact}', '{$password}', '{$role}')";
       if(mysqli_query($conn, $sql1)){
-        header("location: {$hostname}/admin/members.php");
+        header("location: members.php");
       }
     }
   }

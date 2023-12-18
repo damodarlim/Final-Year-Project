@@ -19,7 +19,7 @@ $sql = "DELETE FROM news_table WHERE news_id = {$news_id};";
 $sql .= "UPDATE category_table SET post = post - 1 WHERE category_id = {$cat_id}";
 
 if(mysqli_multi_query($conn, $sql)){
-  header("location: {$hostname}/admin/post.php");
+  header("location: post.php");
 }else{
   echo "Query Failed";
 }

@@ -8,7 +8,8 @@ include ('../includes/dbconnect.php');
     $file_size = $_FILES['thumbnail']['size'];
     $file_tmp = $_FILES['thumbnail']['tmp_name'];
     $file_type = $_FILES['thumbnail']['type'];
-    $file_ext = strtolower(end(explode('.', $file_name))); 
+    $file_Exp = explode('.', $file_name);
+    $file_ext = strtolower(end($file_Exp)); // it will first saperate the name, then take the end and make all the letters to small 
     $extensions = array("jpeg", "jpg", "png");
 
 
@@ -25,8 +26,8 @@ include ('../includes/dbconnect.php');
     if (empty($errors) == true){ // theres no errors that occur, then the picture is uplaoded
       move_uploaded_file($file_tmp, $target);
     }else {
-      print_r($errors);
-      die();
+      echo "<div class='alert alert-danger'>" . implode("<br>", $errors) . "</div>";
+      exit;
     }
   }
 
@@ -35,14 +36,24 @@ include ('../includes/dbconnect.php');
   $date = date("d M, Y");
   $created_by = $_SESSION['member_id']; //THis will mean that who ever is logged in at that time and post. will be the author `
 
-  $sql = "INSERT INTO album_table (title, thumbnail, creation_date,created_by)
-            VALUES ('{$title}', '{$new_name}', '{$date}', '{$created_by}');";
+  $sql = "INSERT INTO album_table (title, thumbnail, creation_date, created_by)
+        VALUES (?, ?, ?, ?)";
 
-  if(mysqli_query($conn, $sql)) {
-    header("location: {$hostname}/admin/album.php");
-  }else {
-    echo "<div class='alert alert-danger'>Query Failed.</div>";
-  }
+$stmt = mysqli_prepare($conn, $sql);
 
+if ($stmt) {
+    mysqli_stmt_bind_param($stmt, "sssi", $title, $new_name, $date, $created_by);
+
+    if (mysqli_stmt_execute($stmt)) {
+        header("location: album.php");
+        exit;
+    } else {
+        echo "<div class='alert alert-danger'>Query Failed.</div>";
+    }
+
+    mysqli_stmt_close($stmt);
+} else {
+    echo "<div class='alert alert-danger'>Prepared statement failed.</div>";
+}
 
 ?>

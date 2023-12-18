@@ -36,17 +36,26 @@ include ('../includes/dbconnect.php');
   $description = mysqli_real_escape_string($conn, $_POST['postdesc']);
   $category = mysqli_real_escape_string($conn, $_POST['category']);
   $date = date("d M, Y");
-  $author = $_SESSION['member_id']; //THis will mean that who ever is logged in at that time and post. will be the author `
-
-  $sql = "INSERT INTO news_table (title, description, category, publish_date,author, news_img)
-            VALUES ('{$title}', '{$description}', '{$category}', '{$date}', {$author}, '{$imageNewName}');";
-  $sql .= "UPDATE category_table SET post = post + 1 WHERE category_id = {$category}"; // to add into the Post section in the Category table
-
-  if(mysqli_multi_query($conn, $sql)) {
-    header("location: {$hostname}/admin/post.php");
-  }else {
-    echo "<div class='alert alert-danger'>Query Failed.</div>";
+  $author = $_SESSION['member_id'];
+  
+  $stmt = mysqli_prepare($conn, "INSERT INTO news_table (title, description, category, publish_date, author, news_img) VALUES (?, ?, ?, ?, ?, ?)");
+  mysqli_stmt_bind_param($stmt, "ssssis", $title, $description, $category, $date, $author, $imageNewName);
+  
+  if (mysqli_stmt_execute($stmt)) {
+      $sqlUpdateCategory = "UPDATE category_table SET post = post + 1 WHERE category_id = ?";
+      $stmtUpdateCategory = mysqli_prepare($conn, $sqlUpdateCategory);
+      mysqli_stmt_bind_param($stmtUpdateCategory, "i", $category);
+      
+      if (mysqli_stmt_execute($stmtUpdateCategory)) {
+          echo '<script>alert("Successfully added!");</script>';
+          header("location: post.php");
+      } else {
+          echo "<div class='alert alert-danger'>Failed to update category.</div>";
+      }
+  } else {
+      echo "<div class='alert alert-danger'>Query Failed.</div>";
   }
-
-
+  
+  mysqli_stmt_close($stmt);
+  mysqli_close($conn);
 ?>

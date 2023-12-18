@@ -8,7 +8,7 @@ session_unset();
 
 session_destroy();
 
-header("location: {$hostname}/admin/")
+header("location: /admin")
 
 
 ?>

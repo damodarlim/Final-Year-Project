@@ -3,7 +3,7 @@
       <div class="container">
           <div class="row">
               <div class="col-md-10">
-                  <h1 class="admin-heading">All Posts</h1>
+                  <h1 class="admin-heading">All Activities</h1>
               </div>
               <div class="col-md-2">
                   <a class="add-new" href="add_activity.php">add Activity</a>
@@ -45,7 +45,7 @@
                     if (mysqli_num_rows($result) > 0) {
                 
                 ?>
-                  <table class="content-table">
+                  <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                       <thead>
                           <th>S.No.</th>
                           <th>Title</th>
@@ -60,7 +60,12 @@
                               <td><?php echo $row['title']; ?></td>
                               <td><?php echo $row['username']; ?></td>
                               <td class='edit'><a href='update_activity.php?id=<?php echo $row["activity_id"]; ?>'><i class='fa fa-edit'></i></a></td>
-                              <td class='delete'><a href='delete_activity.php?id=<?php echo $row["activity_id"];?>'><i class='fa fa-trash'></i></a></td>
+                              <td class='delete'><a href='delete_activity.php?id=<?php echo $row["activity_id"];?>' onclick='return checkdelete()'><i class='fa fa-trash'></i></a></td>
+                              <script>
+                                function checkdelete() {
+                                    return confirm('Are you sure you wan to delete this record ?');
+                                } 
+                              </script>
                           </tr>
                       <?php } ?>
                       </tbody>

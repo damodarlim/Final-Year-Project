@@ -13,53 +13,52 @@
       </p>
     </div>
   </div>
+  
+  <?php 
+  include ('includes/dbconnect.php');
+
+  // Calculate offset code 
+  $limit = 3; //how many data is allowed in one table
+  if (isset($_GET ['page'])) {
+      $page = $_GET ['page'];
+  }else {
+  $page = 1;                        
+  }
+  $offset = ($page - 1) * $limit;
+  
+  $sql = "SELECT donation_table.donation_id, donation_table.title, 
+  donation_table.description ,donation_table.donation_img FROM donation_table 
+  ORDER BY donation_table.donation_id DESC LIMIT {$offset}, {$limit}";
+  
+  $result = mysqli_query($conn, $sql) or die("Query Failed.");
+  if (mysqli_num_rows($result) > 0) {
+      while($row = mysqli_fetch_assoc($result)) {
+  ?>
 
   <!-- Donation Options -->
   <div class="row my-4">
     <div class="col-md-4 mb-4">
       <div class="card">
-        <a href="donate.php" class="card-link">
-          <img src="img/Prabhupada.jpg" class="card-img-top" alt="Donation Option 1" />
+        <a href="donate.php?id=<?php echo $row['donation_id'];?>" class="card-link">
+          <img src="admin/upload/donation/<?php echo $row['donation_img']; ?>" class="card-img-top" alt="Donation Option 1" />
           <div class="card-body">
-            <h5 class="card-title">General Donation</h5>
+            <h5 class="card-title"><?php echo $row['title']; ?></h5>
             <p class="card-text">
-              Make a general donation to support our organization's
-              activities.
+              <?php echo $row['description']; ?>
             </p>
           </div>
           <div class="card-footer">
-            <a href="donate.php" class="btn btn-primary">Donate Now</a>
+            <a href="donate.php?id=<?php echo $row['donation_id'];?>" class="btn btn-primary">Donate Now</a>
           </div>
         </a>
       </div>
     </div>
-    <div class="col-md-4 mb-4">
-      <div class="card">
-        <img src="img/donation2.jpg" class="card-img-top" alt="Donation Option 2" />
-        <div class="card-body">
-          <h5 class="card-title">Sponsorship</h5>
-          <p class="card-text">
-            Sponsor specific events, festivals, or activities organized by TODU.
-          </p>
-          <a href="#" class="btn btn-primary">Donate Now</a>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-4 mb-4">
-      <div class="card">
-        <img src="img/donation3.jpg" class="card-img-top" alt="Donation Option 3" />
-        <div class="card-body">
-          <h5 class="card-title">Building Fund</h5>
-          <p class="card-text">
-            Contribute to the construction and maintenance of our temple.
-          </p>
-          <a href="#" class="btn btn-primary">Donate Now</a>
-        </div>
-      </div>
-    </div>
-    <!-- Add more donation options as needed -->
   </div>
 </div>
+<?php 
+      }
+    }
+?>
 <!-- End Donate Now Section -->
 
 <?php 

@@ -47,5 +47,5 @@ if(isset($_FILES['filesToUpload'])){
 }
 
 session_start();
-header("location: {$hostname}/admin/images.php");
+header("location: images.php");
 ?>

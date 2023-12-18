@@ -17,7 +17,7 @@ unlink("gallery/album/".$row['thumbnail']); //to remove the image from the folde
 $sql = "DELETE FROM album_table WHERE album_id = {$album_id};";
 
 if(mysqli_query($conn, $sql)){
-  header("location: {$hostname}/admin/album.php");
+  header("location: album.php");
 }else{
   echo "Query Failed";
 }

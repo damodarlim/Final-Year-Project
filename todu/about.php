@@ -10,7 +10,7 @@
       <img src="img/logo.jpg" alt="Organization" class="w-100 img-thumbnail">
     </div>
     <div class="col-md-6 mb-4">
-      <!-- About Organization Write-up -->
+      <!-- About Organization -->
       <h2>About Us</h2>
       <p>
         The Temple of Devotion and Understanding (TODU) is a place of worship and spiritual learning. Our organization, inspired by the teachings of ISKCON, aims to promote spiritual growth and understanding.
@@ -31,7 +31,27 @@
         <h3>Opening Hours</h3>
         <p>Monday to Sunday: 8:00 AM - 8:00 PM</p>
       </div>
-      
+
+      <!-- Enquiry Form -->
+      <div class="mt-4">
+        <h3>Enquiry Form</h3>
+        <form action="process_enquiry.php" method="post">
+          <div class="form-group my-2">
+            <label for="name">Your Name:</label>
+            <input type="text" class="form-control" id="name" name="name" required>
+          </div>
+          <div class="form-group my-2">
+            <label for="email">Your Email:</label>
+            <input type="email" class="form-control" id="email" name="email" required>
+          </div>
+          <div class="form-group my-2">
+            <label for="message">Your Message:</label>
+            <textarea class="form-control" id="message" name="message" rows="4" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+        <p class="mt-2">If you have any questions, feel free to ask!</p>
+      </div>
     </div>
   </div>
 </div>

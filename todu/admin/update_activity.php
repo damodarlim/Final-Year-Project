@@ -33,13 +33,13 @@
             <div class="form-group my-4">
                 <label for="Description"> Description</label>
                 <textarea name="actdesc" class="form-control"  required rows="5">
-                    <?php echo $row['description']; ?>
+                <?php echo trim($row['description']); ?>
                 </textarea>
             </div>
             <div class="form-group my-4">
                 <label for="">Activity image</label>
                 <input type="file" name="new-image">
-                <img  src="upload/<?php echo $row['activity_img']; ?>" height="150px">
+                <img  src="upload/activity/<?php echo $row['activity_img']; ?>" height="150px">
                 <input type="hidden" name="old_image" value="<?php echo $row['activity_img']; ?>">
             </div>
             <input type="submit" name="submit" class="btn btn-primary" value="Update" />

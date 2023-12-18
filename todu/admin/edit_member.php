@@ -32,8 +32,7 @@ if (isset($_POST['btn-edit'])) {
             </div>
                 <div class="container d-flex justify-content-center">
                     <?php 
-                    include ('../includes/dbconnect.php');
-                    
+                                        
                     $member_id = $_GET['id'];
                     $sql = "SELECT * FROM member_table WHERE member_id = {$member_id}";
                     $result = mysqli_query($conn, $sql);

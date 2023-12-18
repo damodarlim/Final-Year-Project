@@ -41,7 +41,7 @@ if ($stmt) {
     mysqli_stmt_close($stmt);
 
     if ($result) {
-      header("location: {$hostname}/admin/donation.php");
+      header("location: donation.php");
     } else {
       echo "Query Failed: " . mysqli_error($conn);
     }

@@ -52,7 +52,6 @@ if (mysqli_num_rows($result) > 0) {
         </div>
       </div>
     </div>
-    <!-- Add more activities as needed -->
   </div>
 </div>
 <?php 

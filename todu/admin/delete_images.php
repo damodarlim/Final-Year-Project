@@ -17,7 +17,7 @@ unlink("gallery/".$row['file_path']); //to remove the image from the folder
 $sql = "DELETE FROM images_table WHERE image_id = {$image_id};";
 
 if(mysqli_query($conn, $sql)){
-  header("location: {$hostname}/admin/images.php");
+  header("location: images.php");
 }else{
   echo "Query Failed";
 }

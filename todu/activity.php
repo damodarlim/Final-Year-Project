@@ -32,15 +32,12 @@
     <div class="container my-5">
       <div class="row">
         <div class="col-md-6">
-          <!-- Activity Image -->
           <img src="admin/upload/activity/<?php echo $row['activity_img']; ?>" alt="Activity Image" class="img-fluid" />
         </div>
         <div class="col-md-6">
-          <!-- Activity Description -->
           <p>
             <?php echo $row['description']; ?>
           </p>
-          <!-- You can add more content or customize the layout as needed -->
         </div>
       </div>
     </div>

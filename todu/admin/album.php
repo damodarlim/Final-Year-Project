@@ -41,7 +41,7 @@
                     if (mysqli_num_rows($result) > 0) {
                 
                 ?>
-                  <table class="content-table">
+                  <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                       <thead>
                           <th>S.No.</th>
                           <th>Title</th>
@@ -58,7 +58,13 @@
                               <td><?php echo $row['creation_date']; ?></td>
                               <td><?php echo $row['username']; ?></td>
                               <td class='edit'><a href='update_album.php?id=<?php echo $row["album_id"]; ?>'><i class='fa fa-edit'></i></a></td>
-                              <td class='delete'><a href='delete_album.php?id=<?php echo $row["album_id"];?>'><i class='fa fa-trash'></i></a></td>
+                              <td class='delete'><a href='delete_album.php?id=<?php echo $row["album_id"];?>'
+                              onclick='return checkdelete()'><i class='fa fa-trash'></i></a></td>
+                              <script>
+                                function checkdelete() {
+                                    return confirm('Are you sure you wan to delete this record ?');
+                                } 
+                              </script>
                           </tr>
                       <?php } ?>
                       </tbody>
